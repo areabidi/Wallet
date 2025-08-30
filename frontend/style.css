@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    max-width: 400px;
+}
+
+input {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+}

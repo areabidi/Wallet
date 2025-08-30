@@ -10,9 +10,23 @@ from auth import create_access_token, verify_token
 from utils import hash_password, verify_password
 from users import get_user, create_user
 
+
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
+
 app = FastAPI()
 #a fake database. Later, we’ll connect a real DB like PostgreSQL or SQLite.
 fake_users_db = {}
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:3000", "http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # User	Represents what users send to the API (plain password)
 # UserInDB	Simulates what's stored in the database (hashed password)
