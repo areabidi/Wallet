@@ -1,0 +1,4 @@
+User <---> Wallet Backend <---> Blockchain/Payment Network
+  |             |                      |
+Auth        User Data              Transactions
+Management  Wallet Info            Balance Sync

@@ -47,8 +47,12 @@ def signup(user: User):
 
 @app.post("/login")
 def login(user: User):
+    print("🟡 Login received:", user)
     db_user = get_user(user.email)
-    if not db_user or not verify_password(user.password, db_user["hashed_password"]):
+    print("🟡 DB returned:", db_user)
+    if not db_user or not verify_password(user.password, db_user.hashed_password):
+    #if not db_user or not verify_password(user.password, db_user["hashed_password"]):
+        print("🔴 No user found with that email.")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     token = create_access_token({"sub": user.email})
     return {"access_token": token, "token_type": "bearer"}

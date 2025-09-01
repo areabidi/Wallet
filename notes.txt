@@ -1,0 +1,76 @@
+1. Access FastAPI API Docs UI (Swagger)
+
+Open your browser and go to:
+
+http://127.0.0.1:8001/docs
+
+
+This is an interactive API explorer where you can see all your endpoints (/signup, /login, /protected, etc.).
+
+You can test your API endpoints right from here by sending requests and checking responses.
+
+2. Access FastAPI Redoc UI (alternative docs)
+
+Go to:
+
+http://127.0.0.1:8001/redoc
+
+
+This is another style of documentation generated automatically by FastAPI.
+
+3. Your Frontend Pages (HTML/CSS/JS)
+
+Your frontend files (HTML, CSS, JS) are served separately by your frontend server — which you set up with Python’s http.server or some other web server.
+
+If you ran this command inside your frontend folder:
+
+python -m http.server 3000
+
+
+Then your frontend is accessible at:
+
+http://127.0.0.1:3000
+
+
+Open this URL in your browser to load your HTML page(s).
+
+4. How frontend and backend talk:
+
+Your frontend JavaScript calls the backend API using URLs like:
+
+http://127.0.0.1:8001/signup
+
+
+Make sure in your script.js or frontend code, your BASE_URL is set to:
+
+const BASE_URL = "http://127.0.0.1:8001";
+
+Summary:
+What you want to access	URL	Notes
+FastAPI API interactive docs	http://127.0.0.1:8001/docs
+	Test API endpoints
+Your frontend app (HTML/JS pages)	http://127.0.0.1:3000
+	Your static frontend server
+FastAPI Redoc docs (alternative)	http://127.0.0.1:8001/redoc
+	Another API doc style
+Your API endpoints (directly)	e.g., http://127.0.0.1:8001/signup
+	Usually tested from frontend or docs UI
+
+
+
+	When you run this command inside a folder:
+
+python -m http.server 3000
+
+
+here’s what happens:
+
+It starts a simple HTTP server in the current directory (folder).
+
+This server will serve all the files in that folder and its subfolders over HTTP.
+
+If you open your browser and go to http://127.0.0.1:3000 (or http://localhost:3000), you’ll see:
+
+If there is an index.html file in that folder, it will automatically serve and display that page.
+
+If no index.html exists, it will show you a directory listing of files/folders in that folder.
