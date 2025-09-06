@@ -70,13 +70,13 @@ def protected_route(token: str):
     return {"message": f"Welcome {email}, you are authenticated."}
 
 
-# Serve index.html at the root
-@app.get("/")
-def read_index():
-    index_path = os.path.join("frontend", "index.html")
-    if not os.path.exists(index_path):
-        raise HTTPException(status_code=404, detail="Frontend not found")
-    return FileResponse(index_path)
+# # Serve index.html at the root
+# @app.get("/")
+# def read_index():
+#     index_path = os.path.join("frontend", "index.html")
+#     if not os.path.exists(index_path):
+#         raise HTTPException(status_code=404, detail="Frontend not found")
+#     return FileResponse(index_path)
 
 
 from fastapi.staticfiles import StaticFiles
