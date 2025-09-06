@@ -8,3 +8,5 @@ python-jose
 fastapi
 uvicorn
 sqlalchemy
+ENV = prod
+
