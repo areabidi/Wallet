@@ -7,3 +7,4 @@ python-dotenv
 python-jose
 fastapi
 uvicorn
+pip install sqlalchemy
