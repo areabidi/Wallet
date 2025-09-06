@@ -9,6 +9,9 @@ from pydantic import BaseModel
 from auth import create_access_token, verify_token
 from utils import hash_password, verify_password
 from users import get_user, create_user
+import os
+
+ENV = os.environ.get("ENV", "dev")  # defaults to "dev" if ENV is not set
 
 
 from fastapi.middleware.cors import CORSMiddleware
