@@ -97,3 +97,8 @@ def serve_spa(full_path: str):
     if os.path.exists(index_path):
         return FileResponse(index_path)
     raise HTTPException(status_code=404, detail="Frontend not found")
+
+#testing
+@app.get("/test-css")
+def test_css():
+    return FileResponse("frontend/build/static/style.css")
