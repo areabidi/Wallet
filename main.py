@@ -68,3 +68,28 @@ def protected_route(token: str):
     if not email:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
     return {"message": f"Welcome {email}, you are authenticated."}
+
+
+# Serve index.html at the root
+@app.get("/")
+def read_index():
+    index_path = os.path.join("frontend", "index.html")
+    if not os.path.exists(index_path):
+        raise HTTPException(status_code=404, detail="Frontend not found")
+    return FileResponse(index_path)
+
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
+
+# Mount /static to serve JS, CSS, etc.
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+# Serve index.html at the root
+@app.get("/")
+def read_index():
+    index_path = os.path.join("frontend", "index.html")
+    if not os.path.exists(index_path):
+        raise HTTPException(status_code=404, detail="Frontend not found")
+    return FileResponse(index_path)
