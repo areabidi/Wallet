@@ -9,8 +9,12 @@ from pydantic import BaseModel
 from auth import create_access_token, verify_token
 from utils import hash_password, verify_password
 from users import get_user, create_user
-import os
+from fastapi.staticfiles import StaticFiles
 
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
 ENV = os.environ.get("ENV", "dev")  # defaults to "dev" if ENV is not set
 
 
@@ -72,28 +76,24 @@ def protected_route(token: str):
         raise HTTPException(status_code=401, detail="Invalid or expired token")
     return {"message": f"Welcome {email}, you are authenticated."}
 
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
 
-# Mount /static to serve JS, CSS, etc.
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+# ===== Static Files & Frontend Serving =====
 
-# Serve frontend only in production
-if ENV == "prod":
-    app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static")
+# Serve static files (JS/CSS)
+app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static")
 
-    @app.get("/{full_path:path}")
-    def serve_spa(full_path: str):
-        index_path = os.path.join("frontend", "build", "index.html")
-        if os.path.exists(index_path):
-            return FileResponse(index_path)
+# Serve frontend index.html for SPA routes
+@app.get("/")
+def read_index():
+    index_path = os.path.join("frontend", "build", "index.html")
+    if not os.path.exists(index_path):
         raise HTTPException(status_code=404, detail="Frontend not found")
+    return FileResponse(index_path)
 
-# # Serve index.html at the root
-# @app.get("/")
-# def read_index():
-#     index_path = os.path.join("frontend", "index.html")
-#     if not os.path.exists(index_path):
-#         raise HTTPException(status_code=404, detail="Frontend not found")
-#     return FileResponse(index_path)
+# Optional: serve all paths to support React Router, etc.
+@app.get("/{full_path:path}")
+def serve_spa(full_path: str):
+    index_path = os.path.join("frontend", "build", "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    raise HTTPException(status_code=404, detail="Frontend not found")
