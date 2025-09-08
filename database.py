@@ -22,9 +22,8 @@ DATABASE_URL ="postgresql://postgresDB:12345678@database-1.cuzi082q8zd6.us-east-
 
 
 # 2. Create the engine (connects SQLAlchemy to your DB)
-engine = create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
+#engine = create_engine( DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL)
 
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
