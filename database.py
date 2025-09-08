@@ -9,7 +9,9 @@ from sqlalchemy.orm import sessionmaker
 
 
 # SQLite URL
-DATABASE_URL = "sqlite:///./users.db"
+DATABASE_URL ="postgresql://postgresDB:12345678@database-1.cuzi082q8zd6.us-east-1.rds.amazonaws.com:5432/database-1"
+#postgresql://<username>:<password>@<host>:<port>/<database>
+ #"sqlite:///./users.db"
 # This is the connection string
 # sqlite:///./users.db means:
 # Use SQLite.
